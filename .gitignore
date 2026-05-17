@@ -1,0 +1,25 @@
+# Repositorio de la cursada (lo ignoramos para evitar conflictos de sub-repos y permitirte hacer git pull de la materia de forma independiente)
+UTN2026_c1Div132/
+
+# Dependencias (por si usás npm más adelante)
+node_modules/
+dist/
+.env
+
+# Archivos del sistema y logs
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editores y workspace
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
