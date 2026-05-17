@@ -339,7 +339,8 @@ body {
    ========================================================================== */
 .panel-editor {
     flex: 1.2;
-    min-height: 380px;
+    min-height: 480px;
+    height: 480px;
 }
 
 .editor-container {
@@ -347,6 +348,7 @@ body {
     flex: 1;
     position: relative;
     background: rgba(15, 17, 23, 0.6);
+    overflow: hidden;
 }
 
 .editor-gutter {
@@ -360,6 +362,7 @@ body {
     color: var(--text-muted);
     user-select: none;
     line-height: 1.5rem;
+    overflow-y: hidden;
 }
 
 #code-editor {
@@ -374,10 +377,72 @@ body {
     color: #e5c07b; /* Warm syntax color */
     resize: none;
     tab-size: 4;
+    overflow-y: auto;
 }
 
 #code-editor::placeholder {
     color: var(--text-muted);
+}
+
+/* ==========================================================================
+   EXERCISE SELECTOR BAR
+   ========================================================================== */
+.exercise-selector-bar {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(10, 11, 15, 0.4);
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+}
+
+.exercise-selector-bar::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.exercise-btn {
+    flex-shrink: 0;
+    background: rgba(124, 77, 255, 0.08);
+    border: 1px solid rgba(124, 77, 255, 0.25);
+    color: var(--color-primary-light);
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.85rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.exercise-btn:hover {
+    background: rgba(124, 77, 255, 0.15);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(124, 77, 255, 0.3);
+    color: var(--text-primary);
+}
+
+.exercise-btn.active {
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.2) 0%, rgba(124, 77, 255, 0.2) 100%);
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
+}
+
+.exercise-btn.completed {
+    border-color: #00e676;
+    color: #00e676;
+}
+
+.exercise-btn.completed.active {
+    background: linear-gradient(135deg, rgba(0, 230, 118, 0.2) 0%, rgba(0, 229, 255, 0.2) 100%);
+    border-color: #00e676;
+    box-shadow: 0 0 12px rgba(0, 230, 118, 0.4);
+    color: #fff;
 }
 
 /* ==========================================================================

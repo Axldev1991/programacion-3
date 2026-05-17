@@ -13,307 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnReset = document.getElementById("btn-load-exercise");
     const btnClear = document.getElementById("btn-clear");
 
-    // --- BASE DE DATOS DE MÓDULOS DE ESTUDIO (TEORÍA + EJERCICIOS) ---
-    const modules = {
-        js1: {
-            title: "Módulo I: Sintaxis y Variables",
-            theory: `
-                <h3>Conceptos Elementales</h3>
-                <p>JavaScript es un lenguaje dinámico de un solo hilo. Las variables nos permiten almacenar valores en memoria.</p>
-                
-                <h4>Declaración Moderna</h4>
-                <ul>
-                    <li><strong>const:</strong> Constantes inmutables. Preferila por defecto. Ámbito de bloque.</li>
-                    <li><strong>let:</strong> Reasignables. Ámbito de bloque (evita los problemas históricos de <code>var</code>).</li>
-                </ul>
-
-                <div class="tip-box">
-                    <p><strong>💡 Regla de oro:</strong> Nunca uses <code>var</code>. Genera fugas de memoria y Hoisting peligroso.</p>
-                </div>
-
-                <h4>Igualdad vs Identidad</h4>
-                <div class="code-snippet">5 == "5"   // true (Conversión implícita)
-5 === "5"  // false (Estricto - Recomendo)</div>
-            `,
-            exercise: `// ===== MÓDULO I: PRÁCTICA DE VARIABLES Y TIPOS =====
-
-// 1. Declará una constante con tu nombre y una variable con tu edad
-const nombre = "Axel";
-let edad = 25;
-
-console.log("Hola, mi nombre es " + nombre + " y tengo " + edad + " años.");
-
-// 2. Probá la diferencia de igualdad estricta
-console.log("¿Igualdad simple 10 == '10'?", 10 == '10');
-console.log("¿Igualdad estricta 10 === '10'?", 10 === '10');
-
-// 3. Verificá los tipos de datos en la consola
-console.log("Tipo de nombre:", typeof nombre);
-console.log("Tipo de edad:", typeof edad);
-`
-        },
-        js2: {
-            title: "Módulo II: Control de Flujo",
-            theory: `
-                <h3>Condicionales y Bucles</h3>
-                <p>Las estructuras de control determinan el camino que toma la ejecución del código basado en condiciones lógicas.</p>
-
-                <h4>El Operador Ternario</h4>
-                <p>Una forma rápida y elegante de escribir un <code>if-else</code> simple:</p>
-                <div class="code-snippet">let categoria = edad >= 18 ? "Adulto" : "Menor";</div>
-
-                <h4>Estructuras Iterativas</h4>
-                <ul>
-                    <li><strong>for:</strong> Iteración predeterminada con contador.</li>
-                    <li><strong>while:</strong> Bucle condicional (revalúa antes de entrar).</li>
-                    <li><strong>do-while:</strong> Garantiza al menos UNA ejecución del bloque.</li>
-                </ul>
-            `,
-            exercise: `// ===== MÓDULO II: PRÁCTICA DE CONTROL DE FLUJO =====
-
-// 1. Condicionales e If-Else
-let nota = 8.5;
-if (nota >= 7) {
-    console.log("¡Promocionado!");
-} else if (nota >= 4) {
-    console.log("Aprobado (va a final)");
-} else {
-    console.log("Desaprobado");
-}
-
-// 2. Operador Ternario
-let saldo = 1200;
-let compraPermitida = saldo >= 500 ? "Compra autorizada ✅" : "Fondos insuficientes ❌";
-console.log("Estado de compra:", compraPermitida);
-
-// 3. Bucle For (Tabla de multiplicar)
-console.log("--- Tabla del 7 ---");
-for (let i = 1; i <= 10; i++) {
-    console.log("7 x " + i + " = " + (7 * i));
-}
-`
-        },
-        js3: {
-            title: "Módulo III: Scopes y Funciones",
-            theory: `
-                <h3>Ámbitos y Abstracción</h3>
-                <p>El scope define la visibilidad y accesibilidad de las variables.</p>
-
-                <h4>Tipos de Ámbitos</h4>
-                <ul>
-                    <li><strong>Global:</strong> Accesible en toda la app (propiedad de <code>window</code>).</li>
-                    <li><strong>Local / Función:</strong> Solo accesible dentro de la función donde se declaró.</li>
-                    <li><strong>Bloque:</strong> Variables creadas con <code>let</code>/<code>const</code> dentro de llaves <code>{ }</code> no escapan de ellas.</li>
-                </ul>
-
-                <h4>Arrow Functions (Flecha)</h4>
-                <p>Sintaxis concisa de ES6 con retorno implícito si se declara en una línea y contexto léxico de <code>this</code>.</p>
-                <div class="code-snippet">const duplicar = x => x * 2;</div>
-            `,
-            exercise: `// ===== MÓDULO III: PRÁCTICA DE SCOPES Y FUNCIONES =====
-
-// 1. Demostración de Scope de Bloque
-{
-    var variableGlobal = "Soy accesible afuera";
-    let variableBloque = "Soy invisible afuera";
-}
-console.log(variableGlobal);
-try {
-    console.log(variableBloque);
-} catch (e) {
-    console.error("Error esperado: variableBloque no existe en este scope!");
-}
-
-// 2. Declaración clásica vs Arrow Function
-function calcularIvaClasico(precio) {
-    return precio * 0.21;
-}
-
-const calcularIvaArrow = precio => precio * 0.21;
-
-console.log("IVA Clásico de 1000:", calcularIvaClasico(1000));
-console.log("IVA Arrow de 1000:", calcularIvaArrow(1000));
-`
-        },
-        js4: {
-            title: "Módulo IV: Métodos de Datos",
-            theory: `
-                <h3>Manipulación de Datos</h3>
-                <p>JavaScript posee potentes APIs nativas para transformar cadenas de caracteres y listas (arrays).</p>
-
-                <h4>Métodos Esenciales de String</h4>
-                <ul>
-                    <li><strong>includes():</strong> Retorna booleano si contiene la subcadena.</li>
-                    <li><strong>slice(inicio, fin):</strong> Extrae un fragmento de texto.</li>
-                    <li><strong>split(separador):</strong> Convierte un String en un Array.</li>
-                </ul>
-
-                <h4>Métodos Esenciales de Array</h4>
-                <ul>
-                    <li><strong>push() / pop():</strong> Agrega / remueve al final.</li>
-                    <li><strong>unshift() / shift():</strong> Agrega / remueve al principio.</li>
-                    <li><strong>splice():</strong> Inserta o borra elementos en índices exactos (muta el array).</li>
-                </ul>
-            `,
-            exercise: `// ===== MÓDULO IV: MÉTODOS DE STRINGS Y ARRAYS =====
-
-// 1. Jugando con Strings
-let frase = "Programacion 3 en la UTN Avellaneda";
-console.log("¿Contiene 'UTN'?:", frase.includes("UTN"));
-console.log("Palabras separadas:", frase.split(" "));
-
-// 2. Operaciones con Arrays
-let alumnos = ["Axel", "Lautaro", "Nicolas"];
-console.log("Alumnos iniciales:", alumnos);
-
-// Agregamos al final
-alumnos.push("Matias");
-console.log("Agregado al final:", alumnos);
-
-// Removemos al principio
-let primero = alumnos.shift();
-console.log("Primer alumno removido:", primero);
-console.log("Array resultante:", alumnos);
-`
-        },
-        js5: {
-            title: "Módulo V: Almacenamiento Persistente",
-            theory: `
-                <h3>Persistencia de Datos en Cliente</h3>
-                <p>Permite guardar estados en el navegador para que persistan al refrescar o reiniciar la pestaña.</p>
-
-                <h4>localStorage vs sessionStorage</h4>
-                <ul>
-                    <li><strong>localStorage:</strong> Permanente (hasta que se borre explícitamente).</li>
-                    <li><strong>sessionStorage:</strong> Temporal (se borra al cerrar la pestaña).</li>
-                </ul>
-
-                <h4>Serialización JSON obligatoria</h4>
-                <p>Las APIs de almacenamiento solo aceptan texto plano. Debemos serializar objetos usando JSON:</p>
-                <div class="code-snippet">// Serializar a String
-localStorage.setItem("key", JSON.stringify(objeto));
-// Deserializar a Objeto
-let obj = JSON.parse(localStorage.getItem("key"));</div>
-            `,
-            exercise: `// ===== MÓDULO V: PERSISTENCIA LOCALSTORAGE =====
-
-// 1. Guardamos un dato simple
-localStorage.setItem("usuario_activo", "Axel Div 132");
-console.log("Dato recuperado de LS:", localStorage.getItem("usuario_activo"));
-
-// 2. Guardando datos complejos (Array de Objetos)
-let carrito = [
-    { producto: "Teclado Mecánico", precio: 45000, cant: 1 },
-    { producto: "Mouse Gamer", precio: 22000, cant: 2 }
-];
-
-// OJO: Si guardamos directo, se rompe (se guarda como [object Object])
-localStorage.setItem("carrito_roto", carrito);
-console.log("Carrito sin JSON.stringify:", localStorage.getItem("carrito_roto"));
-
-// Forma CORRECTA:
-localStorage.setItem("carrito_ok", JSON.stringify(carrito));
-console.log("Carrito parseado desde LS:", JSON.parse(localStorage.getItem("carrito_ok")));
-`
-        },
-        js6: {
-            title: "Módulo VI: Manipulación del DOM",
-            theory: `
-                <h3>El Árbol del DOM</h3>
-                <p>El DOM es la representación estructurada en memoria del documento HTML. Podemos modificarlo dinámicamente con JS.</p>
-
-                <h4>Selectores Modernos</h4>
-                <ul>
-                    <li><code>querySelector('selector')</code>: Retorna la primera coincidencia que matchee con el selector CSS.</li>
-                    <li><code>querySelectorAll('selector')</code>: Retorna una colección estática <code>NodeList</code> con todas las coincidencias.</li>
-                </ul>
-
-                <div class="tip-box">
-                    <p><strong>💡 TIP:</strong> Es recomendable evitar el viejo <code>innerHTML</code> cuando insertamos datos que ingresa el usuario, para prevenir ataques de Cross-Site Scripting (XSS). Usá <code>textContent</code>.</p>
-                </div>
-            `,
-            exercise: `// ===== MÓDULO VI: MANIPULACIÓN DEL DOM =====
-
-// 1. Crear un contenedor temporal en nuestro documento
-let tempDiv = document.createElement("div");
-tempDiv.style.padding = "10px";
-tempDiv.style.background = "rgba(124, 77, 255, 0.1)";
-tempDiv.style.border = "1px solid #7c4dff";
-tempDiv.style.borderRadius = "8px";
-tempDiv.style.marginTop = "10px";
-
-// 2. Insertar texto dinámicamente de forma segura
-let parrafo = document.createElement("p");
-parrafo.textContent = "¡Creado e insertado dinámicamente en el DOM! 🚀";
-parrafo.style.color = "#00e5ff";
-
-tempDiv.appendChild(parrafo);
-document.body.appendChild(tempDiv);
-
-console.log("Elemento insertado en el body de forma segura.");
-
-// 3. Limpieza automática tras 5 segundos
-console.log("El elemento se removerá automáticamente en 5 segundos...");
-setTimeout(() => {
-    tempDiv.remove();
-    console.log("Elemento removido correctamente.");
-}, 5000);
-`
-        },
-        js7: {
-            title: "Módulo VII: JS Avanzado (ES6 & HOFs)",
-            theory: `
-                <h3>Programación Funcional y ES6</h3>
-                <p>Las mejoras introducidas desde ES6 potencian la legibilidad, inmutabilidad y reducen la sobrecarga cognitiva.</p>
-
-                <h4>Funciones de Orden Superior (HOF)</h4>
-                <p>Funciones que reciben otras funciones como argumentos o retornan una. Esenciales para iterar listas:</p>
-                <ul>
-                    <li><code>map()</code>: Crea un nuevo array aplicando una función transformadora a cada ítem.</li>
-                    <li><code>filter()</code>: Retorna un nuevo array con los ítems que cumplen una condición.</li>
-                    <li><code>reduce()</code>: Acumula los ítems del array en un único valor (ideal para sumas).</li>
-                </ul>
-
-                <h4>Destructuring y Rest/Spread (...)</h4>
-                <div class="code-snippet">// Destructuring
-const { nombre, edad } = usuario;
-// Spread para clonado inmutable
-const copia = { ...usuario, ocupacion: "Estudiante" };</div>
-            `,
-            exercise: `// ===== MÓDULO VII: CALLBACKS, HOFs Y ES6 AVANZADO =====
-
-// Base de Datos de prueba para trabajar
-const usuarios = [
-    { id: 1, nombre: "Axel", edad: 25, rol: "Developer", activo: true },
-    { id: 2, nombre: "Nicolas", edad: 22, rol: "Designer", activo: false },
-    { id: 3, nombre: "Lautaro", edad: 20, rol: "Developer", activo: true },
-    { id: 4, nombre: "Gaston", edad: 27, rol: "Project Manager", activo: true }
-];
-
-console.log("Lista completa de usuarios:", usuarios);
-
-// 1. FILTER: Filtrar solo desarrolladores activos
-const devsActivos = usuarios.filter(u => u.rol === "Developer" && u.activo);
-console.log("Filtro - Developers Activos:", devsActivos);
-
-// 2. MAP & DESTRUCTURING: Obtener un listado formateado
-const resumenes = usuarios.map(({ nombre, rol }) => {
-    return \`Usuario: \${nombre} | Rol: \${rol}\`;
-});
-console.log("Mapeo a string resumido:", resumenes);
-
-// 3. REDUCE: Obtener el promedio de edad de todos los usuarios
-const sumaEdades = usuarios.reduce((acumulador, usuario) => acumulador + usuario.edad, 0);
-const promedioEdad = sumaEdades / usuarios.length;
-console.log("Promedio de Edad total:", promedioEdad);
-
-// 4. SPREAD OPERATOR: Agregar una propiedad de forma inmutable
-const primerUsuarioClonado = { ...usuarios[0], certificado: "UTN Div 132" };
-console.log("Original:", usuarios[0]);
-console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
-`
-        }
+    // --- CACHE DE PROGRESO DE EJERCICIOS DEL ALUMNO ---
+    const userSolutions = {
+        js1: {}, js2: {}, js3: {}, js4: {}, js5: {}, js6: {}, js7: {}
     };
+
+    const completedExercises = {
+        js1: new Set(), js2: new Set(), js3: new Set(), js4: new Set(), js5: new Set(), js6: new Set(), js7: new Set()
+    };
+
+    let activeModuleKey = "";
+    let activeExerciseIndex = null;
 
     // --- HIJACK/INTERCEPTAR LA CONSOLA GLOBAL ---
     const originalConsole = {
@@ -401,31 +111,111 @@ console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
 
     editor.addEventListener("input", updateGutter);
 
-    // --- SELECCIÓN Y CARGA DE MÓDULOS ---
-    function loadModule(modKey) {
-        const data = modules[modKey];
-        if (!data) return;
+    // --- SELECCIÓN Y CARGA DE EJERCICIOS ---
+    const selectorBar = document.getElementById("exercise-selector-bar");
 
-        // Cargar Teoría
+    function renderExerciseSelector(modKey) {
+        selectorBar.innerHTML = "";
+        const modData = window.PLAYLAB_EXERCISES[modKey];
+        if (!modData || !modData.exercises || modData.exercises.length === 0) {
+            selectorBar.style.display = "none";
+            return;
+        }
+        selectorBar.style.display = "flex";
+
+        modData.exercises.forEach((ex, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "exercise-btn";
+            if (idx === activeExerciseIndex) btn.classList.add("active");
+            if (completedExercises[modKey].has(idx)) btn.classList.add("completed");
+            
+            btn.innerHTML = `<i class="fa-solid fa-code"></i> Ej ${ex.id}`;
+            btn.addEventListener("click", () => {
+                loadExercise(idx);
+            });
+            selectorBar.appendChild(btn);
+        });
+    }
+
+    function loadExercise(index) {
+        const modKey = activeModuleKey;
+        const modData = window.PLAYLAB_EXERCISES[modKey];
+        if (!modData) return;
+
+        // 1. Guardar en caliente el código actual
+        if (activeExerciseIndex !== null && activeExerciseIndex !== index) {
+            userSolutions[modKey][activeExerciseIndex] = editor.value;
+        }
+
+        // 2. Establecer el índice activo
+        activeExerciseIndex = index;
+
+        // 3. Renderizar las píldoras selectoras con el estado activo correcto
+        renderExerciseSelector(modKey);
+
+        const exercise = modData.exercises[index];
+        if (!exercise) return;
+
+        // 4. Inyectar teoría y ejemplo en el panel izquierdo
         theoryContainer.innerHTML = `
-            <h2>${data.title}</h2>
-            ${data.theory}
+            <h2>${exercise.title}</h2>
+            ${exercise.theory}
         `;
 
-        // Cargar Código en el Editor
-        editor.value = data.exercise;
+        // 5. Cargar código en el editor (recuperado de caché o inicial de la BD)
+        const savedCode = userSolutions[modKey][index];
+        editor.value = savedCode !== undefined ? savedCode : exercise.starterCode;
         updateGutter();
-        
-        // Limpiar consola y notificar
+
+        // Ocultar o mostrar el sandbox DOM si estamos en la clase de DOM
+        const sandbox = document.getElementById("sandbox-dom");
+        if (sandbox) {
+            sandbox.style.display = modKey === "js6" ? "block" : "none";
+        }
+    }
+
+    function loadModule(modKey) {
+        // 1. Guardar progreso del ejercicio actual en el módulo previo
+        if (activeModuleKey && activeExerciseIndex !== null) {
+            userSolutions[activeModuleKey][activeExerciseIndex] = editor.value;
+        }
+
+        activeModuleKey = modKey;
+        const data = window.PLAYLAB_EXERCISES[modKey];
+        if (!data) return;
+
+        // Limpiar consola
         consoleOutput.innerHTML = "";
-        appendToConsole("system-msg", `Módulo "${data.title}" cargado correctamente. Presioná 'Ejecutar' para ver su salida.`);
+
+        if (!data.exercises || data.exercises.length === 0) {
+            selectorBar.innerHTML = "";
+            selectorBar.style.display = "none";
+            theoryContainer.innerHTML = `
+                <h2>${data.title}</h2>
+                <div class="theory-text">
+                    <p>Este módulo está disponible en los archivos físicos locales.</p>
+                    <p>Para ver el nuevo sistema interactivo de ejercicios paso a paso en el playground, por favor seleccioná el <strong>Módulo III: Scopes y Funciones</strong>.</p>
+                    <div class="tip-box">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <p>Podés presionar <strong>'Correr Tests 🚀'</strong> para validar los archivos locales de cualquier clase directamente.</p>
+                    </div>
+                </div>
+            `;
+            editor.value = `// Módulo en desarrollo local.\n// Seleccioná "Módulo III: Scopes y Funciones" para probar el playground interactivo!`;
+            activeExerciseIndex = null;
+            updateGutter();
+            return;
+        }
+
+        // Cargar primer ejercicio
+        loadExercise(0);
+        appendToConsole("system-msg", `Módulo "${data.title}" cargado. ¡Resolvé cada ejercicio y corré Ejecutar!`);
     }
 
     selector.addEventListener("change", (e) => {
         loadModule(e.target.value);
     });
 
-    // --- ACCESO RÁPIDO CON BOTONES DE MÓDULO ---
     document.querySelectorAll(".quick-module-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             const mod = btn.getAttribute("data-module");
@@ -434,7 +224,6 @@ console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
         });
     });
 
-    // --- MAPEO DE MÓDULOS A CARPETAS ---
     const moduleFolders = {
         js1: "clase-1-sintaxis-y-variables",
         js2: "clase-2-control-flujo",
@@ -447,18 +236,41 @@ console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
 
     // --- ACCIONES ---
     
-    // Ejecutar Código
+    // Ejecutar y Validar Código
+    function markExerciseCompleted(modKey, index) {
+        completedExercises[modKey].add(index);
+        renderExerciseSelector(modKey);
+    }
+
     function runCode() {
         const code = editor.value;
         appendToConsole("system-msg", "--- Iniciando Ejecución ---");
         
         try {
-            // Evaluamos el código usando new Function en un contexto limpio pero con console redefinido
-            const runner = new Function(code);
-            runner();
+            const modData = window.PLAYLAB_EXERCISES[activeModuleKey];
+            const exercise = modData ? modData.exercises[activeExerciseIndex] : null;
+
+            if (exercise && exercise.testFnCode) {
+                // Concatenamos el código del alumno con la validación de test
+                const fullCode = `
+                    ${code}
+                    
+                    // --- SCRIPT DE VALIDACIÓN ---
+                    ${exercise.testFnCode}
+                `;
+                const runner = new Function(fullCode);
+                runner();
+                
+                // Si no lanzó ningún error, marcamos como aprobado
+                markExerciseCompleted(activeModuleKey, activeExerciseIndex);
+            } else {
+                // Sandbox libre (módulos placeholders)
+                const runner = new Function(code);
+                runner();
+            }
             appendToConsole("system-msg", "--- Ejecución Finalizada con Éxito ---");
         } catch (err) {
-            console.error("Excepción en tiempo de ejecución:", err.message);
+            console.error("Excepción/Test Fallido:", err.message);
             appendToConsole("system-msg", "--- Ejecución Finalizada con Errores ---");
         }
     }
@@ -520,10 +332,19 @@ console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
         });
     }
 
-    // Resetear código original del módulo
+    // Resetear código original del ejercicio activo
     btnReset.addEventListener("click", () => {
-        if (confirm("¿Estás seguro de que querés restablecer este módulo? Se perderán las modificaciones locales.")) {
-            loadModule(selector.value);
+        if (confirm("¿Estás seguro de que querés restablecer este ejercicio? Se perderán las modificaciones locales.")) {
+            const modData = window.PLAYLAB_EXERCISES[activeModuleKey];
+            const exercise = modData ? modData.exercises[activeExerciseIndex] : null;
+            if (exercise) {
+                editor.value = exercise.starterCode;
+                userSolutions[activeModuleKey][activeExerciseIndex] = exercise.starterCode;
+                updateGutter();
+                appendToConsole("system-msg", "Código de pantalla restablecido al valor inicial por defecto.");
+            } else {
+                appendToConsole("warn-msg", "No hay un ejercicio activo para restablecer.");
+            }
         }
     });
 
@@ -553,5 +374,5 @@ console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
     });
 
     // --- INICIALIZACIÓN ---
-    loadModule("js1"); // Cargamos el Módulo I por defecto al iniciar
+    loadModule("js3"); // Seleccionamos el Módulo III de Scopes y Funciones por defecto al iniciar
 });

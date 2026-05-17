@@ -19,6 +19,7 @@
 // ¡Completá acá! Escribí la función declarada completa:
 function calcularAreaRectangulo(base, altura) {
     // Tu código aquí
+    return base * altura;
 }
 
 
@@ -31,7 +32,9 @@ function calcularAreaRectangulo(base, altura) {
  */
 // ¡Completá acá! Declará la constante y asignale la función expresada:
 const celsiusAFahrenheit = null; // Reemplazá 'null' por la función expresada
-
+celsiusAFahrenheit = function(celsius){
+    return celsius * 1.8 + 32;
+}
 
 /**
  * 03. SALUDO PERSONALIZADO (Arrow Functions)
@@ -41,7 +44,7 @@ const celsiusAFahrenheit = null; // Reemplazá 'null' por la función expresada
  */
 // ¡Completá acá! Declará la arrow function:
 const saludarUsuario = null; // Reemplazá 'null' por la arrow function
-
+saludarUsuario = (nombre) => console.log(`¡Hola, ${nombre}! Bienvenido.`)
 
 
 // ==========================================
