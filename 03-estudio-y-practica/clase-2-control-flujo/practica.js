@@ -1,287 +1,401 @@
-// ==========================================================================
-// PROGRAMACIÓN 3 - UTN AVELLANEDA (DIVISIÓN 132)
-// GUÍA PRÁCTICA: CLASE II - ESTRUCTURAS DE CONTROL Y FLUJO
-// ==========================================================================
-// 💡 Instrucciones: Resolvé cada ejercicio escribiendo tu código debajo de 
-// los comentarios. Para ver los resultados, guardá el archivo, abrí el index.html
-// en tu navegador y mirá las salidas en la Consola del Desarrollador (F12).
-// ==========================================================================
-
-console.log("🚀 Iniciando verificación de Práctica de Clase II...\n");
+/**
+ * 🚀 CLASE II: Estructuras de Control y Bucle en JS
+ * -----------------------------------------------------------------
+ * Resolvé los 10 ejercicios escribiendo tu código dentro de cada función.
+ * Abrí index.html en tu navegador y abrí la consola (F12) para ver los tests en vivo.
+ */
 
 // ==========================================
 // 🟢 NIVEL FÁCIL (1 - 3)
 // ==========================================
 
-// --------------------------------------------------------------------------
-// EJERCICIO 1: Calificación de Examen
-// Enunciado: Crea una variable llamada 'nota' con un valor numérico decimal.
-// Escribí una estructura condicional (if - else if - else) que imprima:
-// - "Desaprobado ❌" si la nota es menor a 4.
-// - "Aprobado 📚" si la nota está entre 4 y 6.9.
-// - "Promocionado 🏆" si la nota es 7 o mayor.
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 1: Calificación de Examen ---");
-let nota = 8.5; // Cambiá este valor para probar diferentes caminos
-
-// Tu código acá 👇
-if (nota < 4){
-    console.log("Desaprobado ❌");
-}else if(nota < 7){
-    console.log("Aprobado 📚");
-}else{
-    console.log("Promocionado 🏆");
+/**
+ * 01. CALIFICACIÓN DE EXAMEN
+ * -----------------------------------------------------------------
+ * Recibís 'nota' (número decimal). Retorná la cadena correspondiente:
+ * - "Desaprobado ❌" si la nota es menor a 4.
+ * - "Aprobado 📚" si la nota está entre 4 y 6.9.
+ * - "Promocionado 🏆" si la nota es 7 o mayor.
+ */
+function evaluarNota(nota) {
+    if (nota < 4) {
+        return "Desaprobado ❌";
+    } else if (nota < 7) {
+        return "Aprobado 📚";
+    } else {
+        return "Promocionado 🏆";
+    }
 }
 
 
-
-console.log("\n");
-
-// --------------------------------------------------------------------------
-// EJERCICIO 2: Par o Impar (Operador Ternario)
-// Enunciado: Crea una variable llamada 'numero'. Usando el operador ternario,
-// determiná si el número es par o impar. Imprimí el resultado en la consola.
-// Ejemplo de salida esperada: "El número 14 es Par" o "El número 7 es Impar"
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 2: Par o Impar (Ternario) ---");
-let numero = 15; // Probá cambiar este número
-
-// Tu código acá 👇
-const resultado = (numero % 2 === 0) ? "Par" : "Impar";
-console.log(`El número ${numero} es ${resultado}`);
-
-
-
-console.log("\n");
-
-// --------------------------------------------------------------------------
-// EJERCICIO 3: Día de la Semana (Switch)
-// Enunciado: Crea una variable 'diaId' con un valor del 1 al 7.
-// Usando una estructura 'switch', asigná a una variable el nombre del día
-// correspondiente (1 para "Lunes", 7 para "Domingo") e imprimilo.
-// Si ingresan un número fuera del rango, debés imprimir: "Día no válido ❌"
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 3: Día de la Semana (Switch) ---");
-let diaId = 3; // Probá números del 1 al 8
-
-// Tu código acá 👇
-switch (diaId){
-    case 1:
-        console.log("Hoy es lunes");
-        break
-    case 2:
-        console.log("Hoy es martes");
-        break
-    case 3:
-        console.log("Hoy es miércoles");
-        break
-    case 4:
-        console.log("Hoy es jueves");
-        break
-    case 5:
-        console.log("Hoy es viernes");
-        break
-    case 6:
-        console.log("Hoy es sábado");
-        break
-    case 7:
-        console.log("Hoy es domingo");
-        break
-    default:
-        console.log("Día no válido ❌");
-        break;
+/**
+ * 02. PAR O IMPAR (OPERADOR TERNARIO)
+ * -----------------------------------------------------------------
+ * Recibís 'numero' (entero).
+ * Retorná la cadena exacta usando el operador ternario:
+ * - "El número [numero] es Par"
+ * - "El número [numero] es Impar"
+ */
+function evaluarParImpar(numero) {
+    const res = (numero % 2 === 0) ? "Par" : "Impar";
+    return `El número ${numero} es ${res}`;
 }
 
 
-console.log("\n");
+/**
+ * 03. DÍA DE LA SEMANA (SWITCH)
+ * -----------------------------------------------------------------
+ * Recibís 'diaId' (número del 1 al 7).
+ * Retorná el nombre del día ("Lunes" para 1, "Domingo" para 7).
+ * Si ingresan un número fuera del rango de 1 a 7, debés retornar: "Día no válido ❌"
+ */
+function obtenerDiaSemana(diaId) {
+    switch (diaId) {
+        case 1: return "Lunes";
+        case 2: return "Martes";
+        case 3: return "Miércoles";
+        case 4: return "Jueves";
+        case 5: return "Viernes";
+        case 6: return "Sábado";
+        case 7: return "Domingo";
+        default: return "Día no válido ❌";
+    }
+}
+
 
 
 // ==========================================
 // 🟡 NIVEL MEDIO (4 - 7)
 // ==========================================
 
-// --------------------------------------------------------------------------
-// EJERCICIO 4: Lanzamiento de Cohete (Bucle While)
-// Enunciado: Crea una variable 'cuenta' inicializada en 10.
-// Usando un bucle 'while', realizá una cuenta regresiva imprimiendo cada número.
-// Al finalizar el bucle, debés imprimir: "¡Despegue! 🚀"
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 4: Lanzamiento de Cohete ---");
-
-// Tu código acá 👇
-let i=10;
-while(i>0){
-    console.log(i--)
-}
-console.log("¡Despegue! 🚀")
-
-
-console.log("\n");
-
-// --------------------------------------------------------------------------
-// EJERCICIO 5: Salteando Múltiplos de 5 (Bucle For + Continue)
-// Enunciado: Escribí un bucle 'for' que recorra los números del 1 al 25.
-// Usando la sentencia 'continue', hacé que el bucle se saltee (no imprima)
-// todos los números que sean múltiplos de 5.
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 5: Salteando Múltiplos de 5 ---");
-
-// Tu código acá 👇
-for (let i = 1; i <= 25; i++){
-    if (i % 5 === 0){
-        continue;
+/**
+ * 04. LANZAMIENTO DE COHETE (BUCLE WHILE)
+ * -----------------------------------------------------------------
+ * Retorná un array conteniendo la cuenta regresiva desde 10 hasta 1,
+ * y como último elemento el string "¡Despegue! 🚀".
+ * Usá obligatoriamente un bucle 'while'.
+ */
+function cuentaRegresiva() {
+    let cuenta = 10;
+    const reg = [];
+    while (cuenta > 0) {
+        reg.push(cuenta);
+        cuenta--;
     }
-    console.log(i);
+    reg.push("¡Despegue! 🚀");
+    return reg;
 }
 
 
-console.log("\n");
-
-// --------------------------------------------------------------------------
-// EJERCICIO 6: Encontrando el Tesoro (Bucle For + Break)
-// Enunciado: Dado el siguiente array de objetos 'cofres', escribí un bucle 'for'
-// para buscar el cofre que tenga la propiedad 'tesoro: true'.
-// Una vez que lo encuentres, imprimí un mensaje con su 'id' y usá 'break'
-// para interrumpir el bucle inmediatamente. El bucle NO debe seguir buscando
-// una vez hallado el tesoro.
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 6: Encontrando el Tesoro ---");
-const cofres = [
-    { id: "Cofre de madera", tesoro: false },
-    { id: "Cofre oxidado", tesoro: false },
-    { id: "Cofre de plata", tesoro: true }, // <-- El tesoro está acá
-    { id: "Cofre dorado", tesoro: false },
-    { id: "Cofre maldito", tesoro: false }
-];
-
-// Tu código acá 👇
-for (let cofre of cofres){
-    if (cofre["tesoro"]==true){
-        console.log(`El tesoro fue encontrado en ${cofre["id"]}`);
-        break
+/**
+ * 05. SALTEANDO MÚLTIPLOS DE 5 (FOR + CONTINUE)
+ * -----------------------------------------------------------------
+ * Recorré los números del 1 al 25 usando un bucle 'for'.
+ * Acumulá en un array y retorná únicamente los números que NO sean múltiplos de 5.
+ * Usá la sentencia 'continue' para saltear los múltiplos de 5.
+ */
+function saltearMultiplosDeCinco() {
+    const resultado = [];
+    for (let i = 1; i <= 25; i++) {
+        if (i % 5 === 0) {
+            continue;
+        }
+        resultado.push(i);
     }
+    return resultado;
 }
 
 
-console.log("\n");
-
-// --------------------------------------------------------------------------
-// EJERCICIO 7: Menú Interactivo Simulado (Bucle Do-While)
-// Enunciado: Simular el flujo de un menú de un videojuego.
-// Crea una variable 'opcionSeleccionada' inicializada en 1.
-// Usando un bucle 'do-while', simulá que el menú se ejecuta. En cada iteración:
-// 1. Si opcionSeleccionada es 1, imprimí: "Jugando partida... 🎮" e incrementá opcionSeleccionada a 2.
-// 2. Si opcionSeleccionada es 2, imprimí: "Mostrando configuraciones... ⚙️" e incrementá opcionSeleccionada a 3.
-// 3. El bucle debe terminar cuando la opcionSeleccionada sea igual a 3, imprimiendo: "Saliendo del juego... 👋"
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 7: Menú Interactivo Simulado ---");
-
-// Tu código acá 👇
-let opcionSeleccionada = 1;
-do{
-    console.log("[1] Jugar Partida");
-    console.log("[2] Configuración");
-    console.log("[3] Salir");
-    if(opcionSeleccionada == 1){
-        console.log("Jugando partida... 🎮");
-        opcionSeleccionada++;
+/**
+ * 06. ENCONTRANDO EL TESORO (FOR + BREAK)
+ * -----------------------------------------------------------------
+ * Recibís un array 'cofres' donde cada elemento es `{ id: string, tesoro: boolean }`.
+ * Recorré el array usando un bucle 'for' buscando el cofre que tenga 'tesoro: true'.
+ * Una vez que lo encuentres, retorná su 'id' e interrumpí el bucle de inmediato con 'break'.
+ */
+function buscarTesoro(cofres) {
+    let encontradoId = null;
+    for (let i = 0; i < cofres.length; i++) {
+        if (cofres[i].tesoro === true) {
+            encontradoId = cofres[i].id;
+            break;
+        }
     }
-    else if(opcionSeleccionada == 2){
-        console.log("Mostrando configuraciones... ⚙️");
-        opcionSeleccionada++;
-    }
-    else if(opcionSeleccionada == 3){
-        console.log("Saliendo del juego... 👋");
-        opcionSeleccionada++;
-    }
-    
-
-} while(opcionSeleccionada <= 3)
+    return encontradoId;
+}
 
 
-console.log("\n");
+/**
+ * 07. MENÚ INTERACTIVO SIMULADO (DO-WHILE)
+ * -----------------------------------------------------------------
+ * Simulá el menú interactivo con do-while.
+ * Recibís 'opcionSeleccionada' (que empieza en 1).
+ * Acumulá las acciones en un array y retornalo al finalizar:
+ * - Si opcionSeleccionada es 1: agregá "Jugando partida... 🎮" e incrementá a 2.
+ * - Si opcionSeleccionada es 2: agregá "Mostrando configuraciones... ⚙️" e incrementá a 3.
+ * - Si opcionSeleccionada es 3: agregá "Saliendo del juego... 👋" e incrementá a 4.
+ * El bucle termina cuando opcionSeleccionada sea mayor a 3.
+ */
+function simularMenu(opcionSeleccionada = 1) {
+    const acciones = [];
+    do {
+        if (opcionSeleccionada === 1) {
+            acciones.push("Jugando partida... 🎮");
+            opcionSeleccionada++;
+        } else if (opcionSeleccionada === 2) {
+            acciones.push("Mostrando configuraciones... ⚙️");
+            opcionSeleccionada++;
+        } else if (opcionSeleccionada === 3) {
+            acciones.push("Saliendo del juego... 👋");
+            opcionSeleccionada++;
+        }
+    } while (opcionSeleccionada <= 3);
+    return acciones;
+}
+
 
 
 // ==========================================
 // 🔴 NIVEL DIFÍCIL (8 - 10)
 // ==========================================
 
-// --------------------------------------------------------------------------
-// EJERCICIO 8: Generador de Pirámide de Asteriscos (Bucles Anidados)
-// Enunciado: Crea una variable 'altura' con valor 5.
-// Usando bucles anidados (un bucle dentro de otro), dibujá en consola una 
-// pirámide que crezca línea por línea.
-// Ejemplo de salida esperada para altura = 5:
-// *
-// **
-// ***
-// ****
-// *****
-// 💡 Ayuda: Podés ir acumulando caracteres en un string de línea antes de imprimir.
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 8: Pirámide de Asteriscos ---");
-let altura = 5;
-
-// Tu código acá 👇
-for (let i = 0; i < altura; i++){
-    let simbolo = "*";
-    console.log(simbolo.repeat(i + 1));
-}
-
-
-console.log("\n");
-
-// --------------------------------------------------------------------------
-// EJERCICIO 9: Generador de Secuencia Fibonacci (Bucles y Variables)
-// Enunciado: La secuencia de Fibonacci comienza con 0 y 1, y cada término siguiente
-// es la suma de los dos anteriores (0, 1, 1, 2, 3, 5, 8, 13, 21...).
-// Crea una variable 'terminos' con valor 10.
-// Escribí un bucle para calcular e imprimir los primeros 10 términos de la secuencia.
-// 💡 Ayuda: Vas a necesitar llevar el registro de dos números previos.
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 9: Serie de Fibonacci ---");
-let terminos = 10;
-let aux1 = 0;
-let aux2 = 1;
-// Tu código acá 👇
-for (let i = 0; i < terminos; i++){
-    console.log(aux1);
-    let siguiente = aux1 + aux2;
-    aux1 = aux2;
-    aux2 = siguiente;
-}
-
-
-
-console.log("\n");
-
-// --------------------------------------------------------------------------
-// EJERCICIO 10: Validador de Números Primos (Estructura Algorítmica)
-// Enunciado: Un número primo es un entero mayor que 1 que solo es divisible
-// por sí mismo y por 1.
-// Crea una variable 'candidato' con el valor 29.
-// Escribí un algoritmo usando bucles y condicionales para verificar si 
-// 'candidato' es primo o no. Imprimí el veredicto en la consola.
-// 💡 Ayuda: Probá dividiendo el candidato por números desde 2 hasta su raíz cuadrada o candidato-1.
-// Si encontrás un divisor exacto (resto igual a cero), ya no es primo.
-// --------------------------------------------------------------------------
-console.log("--- Ejercicio 10: Validador de Números Primos ---");
-let candidato = 29; // Cambialo por 12, 17, 33 para probar
-
-// Tu código acá 👇
-let esPrimo = candidato > 1;
-for (let i = 2; i < candidato; i++){
-    if (candidato % i === 0){
-        esPrimo = false;
-        break;
+/**
+ * 08. GENERADOR DE PIRÁMIDE DE ASTERISCOS (BUCLES ANIDADOS)
+ * -----------------------------------------------------------------
+ * Recibís 'altura' (número entero).
+ * Retorná un array donde cada elemento sea una línea de la pirámide construida con asteriscos.
+ * Ejemplo para altura = 3: ["*", "**", "***"]
+ * Usá bucles para construir los renglones.
+ */
+function generarPiramide(altura) {
+    const lineas = [];
+    for (let i = 1; i <= altura; i++) {
+        let linea = "";
+        for (let j = 1; j <= i; j++) {
+            linea += "*";
+        }
+        lineas.push(linea);
     }
-}
-if (esPrimo) {
-    console.log(`El número ${candidato} es primo ✅`);
-} else {
-    console.log(`El número ${candidato} no es primo ❌`);
+    return lineas;
 }
 
 
-console.log("\n");
-console.log("🏁 Verificación de Práctica de Clase II completada.");
+/**
+ * 09. SECUENCIA DE FIBONACCI
+ * -----------------------------------------------------------------
+ * Recibís 'terminos' (número entero).
+ * Retorná un array conteniendo los primeros 'terminos' de la secuencia Fibonacci.
+ * Ejemplo para terminos = 5: [0, 1, 1, 2, 3]
+ */
+function generarFibonacci(terminos) {
+    const seq = [];
+    let aux1 = 0;
+    let aux2 = 1;
+    for (let i = 0; i < terminos; i++) {
+        seq.push(aux1);
+        let sig = aux1 + aux2;
+        aux1 = aux2;
+        aux2 = sig;
+    }
+    return seq;
+}
+
+
+/**
+ * 10. VALIDADOR DE NÚMEROS PRIMOS
+ * -----------------------------------------------------------------
+ * Recibís 'candidato' (número entero).
+ * Retorná 'true' si es primo, y 'false' de lo contrario.
+ * Recordá que los primos son mayores que 1 y solo divisibles por sí mismos y por 1.
+ */
+function esNumeroPrimo(candidato) {
+    if (candidato <= 1) return false;
+    let esPrimo = true;
+    for (let i = 2; i < candidato; i++) {
+        if (candidato % i === 0) {
+            esPrimo = false;
+            break;
+        }
+    }
+    return esPrimo;
+}
+
+
+
+
+
+// ==========================================
+// 🧪 FRAMEWORK DE AUTOTESTEO EN CONSOLA
+// ==========================================
+
+(function ejecutarTests() {
+    setTimeout(() => {
+        console.clear();
+        console.log("%c🧪 INICIANDO AUTO-EVALUACIÓN CLASE II - CONTROL DE FLUJO 🧪", "color: #e040fb; font-weight: 800; font-size: 1.2rem;");
+        console.log("-----------------------------------------------------------------");
+
+        let totalTests = 10;
+        let aprobados = 0;
+
+        const printResult = (num, title, success, details, error = null) => {
+            const icon = success ? "✅" : "❌";
+            const badgeColor = success ? "background: #e040fb; color: #fff;" : "background: #ff1744; color: #fff;";
+            console.group(`%c EJERCICIO ${num}: ${title} `, `${badgeColor} font-weight: bold; border-radius: 3px; padding: 2px 5px;`);
+            if (success) {
+                console.log(`%c${icon} Aprobado: ${details}`, "color: #e040fb; font-weight: 500;");
+                aprobados++;
+            } else {
+                console.log(`%c${icon} Fallido: ${details}`, "color: #ff1744; font-weight: bold;");
+                if (error) {
+                    console.log("%cDetalle del error:", "color: #646a78; font-style: italic;");
+                    console.error(error);
+                }
+            }
+            console.groupEnd();
+        };
+
+        // 1. evaluarNota
+        try {
+            const r1 = evaluarNota(3);
+            const r2 = evaluarNota(5.5);
+            const r3 = evaluarNota(8);
+            if (r1.includes("Desaprobado") && r2.includes("Aprobado") && r3.includes("Promocionado")) {
+                printResult(1, "Condicionales (Notas)", true, "Estructuras condicionales evaluadas correctamente.");
+            } else {
+                printResult(1, "Condicionales (Notas)", false, `Valores inesperados.`);
+            }
+        } catch (e) {
+            printResult(1, "Condicionales (Notas)", false, "Error en la ejecución.", e);
+        }
+
+        // 2. evaluarParImpar
+        try {
+            const r1 = evaluarParImpar(14);
+            const r2 = evaluarParImpar(7);
+            if (r1.includes("Par") && r2.includes("Impar")) {
+                printResult(2, "Operador Ternario", true, "Par/Impar determinado con ternario con éxito.");
+            } else {
+                printResult(2, "Operador Ternario", false, "Salida con formato incorrecto.");
+            }
+        } catch (e) {
+            printResult(2, "Operador Ternario", false, "Error en la ejecución.", e);
+        }
+
+        // 3. obtenerDiaSemana
+        try {
+            const r1 = obtenerDiaSemana(1);
+            const r2 = obtenerDiaSemana(7);
+            const r3 = obtenerDiaSemana(8);
+            if (r1 === "Lunes" && r2 === "Domingo" && r3.includes("no válido")) {
+                printResult(3, "Estructura Switch", true, "Control de flujo de días de la semana y default completado.");
+            } else {
+                printResult(3, "Estructura Switch", false, "Veredicto erróneo.");
+            }
+        } catch (e) {
+            printResult(3, "Estructura Switch", false, "Error en la ejecución.", e);
+        }
+
+        // 4. cuentaRegresiva
+        try {
+            const res = cuentaRegresiva();
+            if (res && res[0] === 10 && res[9] === 1 && res[10] === "¡Despegue! 🚀") {
+                printResult(4, "Bucle While (Regresivo)", true, "Cuenta regresiva y despegue generados perfectamente.");
+            } else {
+                printResult(4, "Bucle While (Regresivo)", false, `Secuencia obtenida errónea: ${JSON.stringify(res)}`);
+            }
+        } catch (e) {
+            printResult(4, "Bucle While (Regresivo)", false, "Error en la ejecución.", e);
+        }
+
+        // 5. saltearMultiplosDeCinco
+        try {
+            const res = saltearMultiplosDeCinco();
+            if (res && res.length === 20 && !res.includes(5) && !res.includes(10) && !res.includes(25)) {
+                printResult(5, "For + Continue (Salteo de Múltiplos)", true, "Múltiplos de 5 omitidos usando continue de forma limpia.");
+            } else {
+                printResult(5, "For + Continue (Salteo de Múltiplos)", false, `Error en la secuencia: ${JSON.stringify(res)}`);
+            }
+        } catch (e) {
+            printResult(5, "For + Continue (Salteo de Múltiplos)", false, "Error en la ejecución.", e);
+        }
+
+        // 6. buscarTesoro
+        try {
+            const list = [
+                { id: "Madera", tesoro: false },
+                { id: "Plata", tesoro: true },
+                { id: "Oro", tesoro: false }
+            ];
+            const res = buscarTesoro(list);
+            if (res === "Plata") {
+                printResult(6, "Bucle For + Break (Búsqueda)", true, "Cofre del tesoro hallado y bucle interrumpido con break.");
+            } else {
+                printResult(6, "Bucle For + Break (Búsqueda)", false, `Retornó: ${res}`);
+            }
+        } catch (e) {
+            printResult(6, "Bucle For + Break (Búsqueda)", false, "Error en la ejecución.", e);
+        }
+
+        // 7. simularMenu
+        try {
+            const res = simularMenu(1);
+            if (res && res.length === 3 && res[0].includes("partida") && res[2].includes("Saliendo")) {
+                printResult(7, "Do-While (Menú Videojuego)", true, "Menu interactivo simulado secuencialmente.");
+            } else {
+                printResult(7, "Do-While (Menú Videojuego)", false, `Resultado: ${JSON.stringify(res)}`);
+            }
+        } catch (e) {
+            printResult(7, "Do-While (Menú Videojuego)", false, "Error en la ejecución.", e);
+        }
+
+        // 8. generarPiramide
+        try {
+            const res = generarPiramide(4);
+            if (res && res[0] === "*" && res[3] === "****" && res.length === 4) {
+                printResult(8, "Bucles Anidados (Pirámide)", true, "Líneas de la pirámide de asteriscos formadas con éxito.");
+            } else {
+                printResult(8, "Bucles Anidados (Pirámide)", false, `Pirámide generada: ${JSON.stringify(res)}`);
+            }
+        } catch (e) {
+            printResult(8, "Bucles Anidados (Pirámide)", false, "Error en la ejecución.", e);
+        }
+
+        // 9. generarFibonacci
+        try {
+            const res = generarFibonacci(10);
+            if (JSON.stringify(res) === "[0,1,1,2,3,5,8,13,21,34]") {
+                printResult(9, "Serie de Fibonacci", true, "Primeros 10 números de la serie calculados correctamente.");
+            } else {
+                printResult(9, "Serie de Fibonacci", false, `Resultado obtenido: ${JSON.stringify(res)}`);
+            }
+        } catch (e) {
+            printResult(9, "Serie de Fibonacci", false, "Error en la ejecución.", e);
+        }
+
+        // 10. esNumeroPrimo
+        try {
+            const r1 = esNumeroPrimo(29);
+            const r2 = esNumeroPrimo(12);
+            const r3 = esNumeroPrimo(1);
+            if (r1 === true && r2 === false && r3 === false) {
+                printResult(10, "Validador Primos (Algoritmo)", true, "Divisibilidad analizada perfectamente y veredicto correcto.");
+            } else {
+                printResult(10, "Validador Primos (Algoritmo)", false, `Erróneo. 29: ${r1}, 12: ${r2}, 1: ${r3}`);
+            }
+        } catch (e) {
+            printResult(10, "Validador Primos (Algoritmo)", false, "Error en la ejecución.", e);
+        }
+
+        // Resumen
+        setTimeout(() => {
+            console.log("-----------------------------------------------------------------");
+            if (aprobados === totalTests) {
+                console.log("%c🏆 ¡ESTUPENDO! Dominás el flujo y las estructuras de control al 100%. 🏆", "color: #e040fb; font-weight: bold; font-size: 1.1rem;");
+            } else {
+                console.log(`%c⚠️ Módulo II en progreso: ${aprobados}/${totalTests} aprobados. ⚠️`, "color: #ff9100; font-weight: bold; font-size: 1.1rem;");
+            }
+            console.log("-----------------------------------------------------------------");
+        }, 150);
+
+    }, 200);
+})();
