@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS PlayLab - Entorno de Estudio UTN</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Hojas de Estilo -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Script Principal -->
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Encabezado -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fa-solid fa-flask-vial glow-icon"></i>
+                <h1>JS <span class="gradient-text">PlayLab</span></h1>
+                <span class="badge">UTN Div 132</span>
+            </div>
+            <p class="subtitle">Tablero interactivo para dominar JavaScript desde las bases hasta funcional.</p>
+        </header>
+
+        <main class="app-grid">
+            <!-- Columna Izquierda: Temarios y Guía Teórica -->
+            <section class="panel card panel-theory">
+                <div class="panel-header">
+                    <div class="title-group">
+                        <i class="fa-solid fa-graduation-cap header-icon"></i>
+                        <h2>Módulo de Estudio</h2>
+                    </div>
+                    <div class="select-wrapper">
+                        <select id="module-selector">
+                            <option value="js1">Módulo I: Sintaxis y Variables</option>
+                            <option value="js2">Módulo II: Control de Flujo</option>
+                            <option value="js3">Módulo III: Scopes y Funciones</option>
+                            <option value="js4">Módulo IV: Métodos & Datos</option>
+                            <option value="js5">Módulo V: Persistencia & Globals</option>
+                            <option value="js6">Módulo VI: Manipulación DOM</option>
+                            <option value="js7" selected>Módulo VII: JS Avanzado (HOFs, ES6)</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+
+                <div class="panel-content">
+                    <div id="theory-content" class="theory-text">
+                        <!-- El contenido teórico se carga dinámicamente según el módulo seleccionado -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Columna Central/Derecha: Editor de Código y Consola -->
+            <section class="panel-interactive">
+                <!-- Tarjeta del Editor de Código -->
+                <div class="panel card panel-editor">
+                    <div class="panel-header">
+                        <div class="title-group">
+                            <i class="fa-solid fa-code header-icon"></i>
+                            <h2>Playground de Código</h2>
+                        </div>
+                        <div class="action-buttons">
+                            <button id="btn-load-exercise" class="btn btn-secondary" title="Recargar ejercicio original">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                <span>Resetear</span>
+                            </button>
+                            <button id="btn-run" class="btn btn-primary" title="Ejecutar código (Ctrl + Enter)">
+                                <i class="fa-solid fa-play"></i>
+                                <span>Ejecutar</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="editor-container">
+                        <div class="editor-gutter">
+                            <!-- Los números de línea se generan dinámicamente -->
+                        </div>
+                        <textarea id="code-editor" spellcheck="false" autocomplete="off" placeholder="// Escribí tu código JavaScript acá..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de la Consola Integrada -->
+                <div class="panel card panel-console">
+                    <div class="panel-header">
+                        <div class="title-group">
+                            <i class="fa-solid fa-terminal header-icon"></i>
+                            <h2>Consola del Desarrollador</h2>
+                        </div>
+                        <button id="btn-clear" class="btn btn-tertiary">
+                            <i class="fa-solid fa-trash-can"></i>
+                            <span>Limpiar</span>
+                        </button>
+                    </div>
+                    <div class="console-body" id="console-output">
+                        <div class="console-line system-msg">
+                            <span class="time">[--:--:--]</span>
+                            <span class="content">Consola interactiva iniciada con éxito. Ejecutá tu código para ver los resultados aquí.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Hecho con <i class="fa-solid fa-heart text-danger"></i> para el estudio autónomo de Programación 3. Axel & Antigravity &copy; 2026.</p>
+        </footer>
+    </div>
+</body>
+</html>

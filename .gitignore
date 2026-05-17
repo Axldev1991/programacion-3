@@ -1,5 +1,6 @@
 # Repositorio de la cursada (lo ignoramos para evitar conflictos de sub-repos y permitirte hacer git pull de la materia de forma independiente)
-UTN2026_c1Div132/
+01-materia-oficial/
+
 
 # Dependencias (por si usás npm más adelante)
 node_modules/
