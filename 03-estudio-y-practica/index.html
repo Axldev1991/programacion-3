@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome para Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Hojas de Estilo -->
     <link rel="stylesheet" href="css/main.css">
     <!-- Script Principal -->
@@ -25,6 +25,32 @@
                 <span class="badge">UTN Div 132</span>
             </div>
             <p class="subtitle">Tablero interactivo para dominar JavaScript desde las bases hasta funcional.</p>
+            <div class="standalone-practice-modules" style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.06); display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <span style="color: var(--text-muted); font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; margin-right: 0.5rem;">
+                    <i class="fa-solid fa-graduation-cap"></i> Cargar Clase:
+                </span>
+                <button class="quick-module-btn" data-module="js1" style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(0, 191, 165, 0.2); background: rgba(0, 191, 165, 0.08); color: #00bfa5; padding: 0.4rem 0.8rem; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">
+                    Clase I
+                </button>
+                <button class="quick-module-btn" data-module="js2" style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(0, 229, 255, 0.08); color: var(--color-secondary-light); padding: 0.4rem 0.8rem; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">
+                    Clase II
+                </button>
+                <button class="quick-module-btn" data-module="js3" style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(179, 136, 255, 0.2); background: rgba(179, 136, 255, 0.08); color: #b388ff; padding: 0.4rem 0.8rem; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">
+                    Clase III
+                </button>
+                <button class="quick-module-btn" data-module="js4" style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(255, 128, 171, 0.2); background: rgba(255, 128, 171, 0.08); color: #ff80ab; padding: 0.4rem 0.8rem; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">
+                    Clase IV
+                </button>
+                <button class="quick-module-btn" data-module="js5" style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(255, 145, 0, 0.2); background: rgba(255, 145, 0, 0.08); color: #ff9100; padding: 0.4rem 0.8rem; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">
+                    Clase V
+                </button>
+                <button class="quick-module-btn" data-module="js6" style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(0, 230, 118, 0.2); background: rgba(0, 230, 118, 0.08); color: #00e676; padding: 0.4rem 0.8rem; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">
+                    Clase VI
+                </button>
+                <button class="quick-module-btn" data-module="js7" style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(255, 61, 0, 0.2); background: rgba(255, 61, 0, 0.08); color: #ff3d00; padding: 0.4rem 0.8rem; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);">
+                    Clase VII
+                </button>
+            </div>
         </header>
 
         <main class="app-grid">
@@ -65,14 +91,18 @@
                             <i class="fa-solid fa-code header-icon"></i>
                             <h2>Playground de Código</h2>
                         </div>
-                        <div class="action-buttons">
+                        <div class="action-buttons" style="display: flex; gap: 0.5rem;">
                             <button id="btn-load-exercise" class="btn btn-secondary" title="Recargar ejercicio original">
                                 <i class="fa-solid fa-rotate-left"></i>
                                 <span>Resetear</span>
                             </button>
-                            <button id="btn-run" class="btn btn-primary" title="Ejecutar código (Ctrl + Enter)">
+                            <button id="btn-run" class="btn btn-secondary" title="Ejecutar código de pantalla">
                                 <i class="fa-solid fa-play"></i>
                                 <span>Ejecutar</span>
+                            </button>
+                            <button id="btn-run-tests" class="btn btn-primary" title="Ejecutar tests autoevaluación del archivo local de esta clase" style="background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%); box-shadow: 0 4px 12px rgba(0, 229, 255, 0.25);">
+                                <i class="fa-solid fa-rocket"></i>
+                                <span>Correr Tests 🚀</span>
                             </button>
                         </div>
                     </div>
@@ -99,7 +129,7 @@
                     <div class="console-body" id="console-output">
                         <div class="console-line system-msg">
                             <span class="time">[--:--:--]</span>
-                            <span class="content">Consola interactiva iniciada con éxito. Ejecutá tu código para ver los resultados aquí.</span>
+                            <span class="content">Consola interactiva iniciada con éxito. Ejecutá tu código de pantalla o corré los tests locales de la clase.</span>
                         </div>
                     </div>
                 </div>
@@ -110,6 +140,16 @@
         <footer class="app-footer">
             <p>Hecho con <i class="fa-solid fa-heart text-danger"></i> para el estudio autónomo de Programación 3. Axel & Antigravity &copy; 2026.</p>
         </footer>
+    </div>
+
+    <!-- Contenedor Invisible de Pruebas DOM para Clase VI -->
+    <div id="sandbox-dom" style="display: none; position: absolute; width: 0; height: 0; overflow: hidden; opacity: 0; pointer-events: none;">
+        <h1 id="titulo-principal">Título Principal Inicial de Prueba</h1>
+        <button id="boton-estilo">Botón de Prueba</button>
+        <input id="entrada-usuario" type="text" value="">
+        <div id="contenedor-dinamico"></div>
+        <p class="parrafo-estudio">Párrafo de prueba 1</p>
+        <p class="parrafo-estudio">Párrafo de prueba 2</p>
     </div>
 </body>
 </html>

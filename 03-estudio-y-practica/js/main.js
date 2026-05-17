@@ -425,6 +425,26 @@ console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
         loadModule(e.target.value);
     });
 
+    // --- ACCESO RÁPIDO CON BOTONES DE MÓDULO ---
+    document.querySelectorAll(".quick-module-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const mod = btn.getAttribute("data-module");
+            selector.value = mod;
+            loadModule(mod);
+        });
+    });
+
+    // --- MAPEO DE MÓDULOS A CARPETAS ---
+    const moduleFolders = {
+        js1: "clase-1-sintaxis-y-variables",
+        js2: "clase-2-control-flujo",
+        js3: "clase-3-funciones-y-scopes",
+        js4: "clase-4-arrays-y-objetos",
+        js5: "clase-5-persistencia-y-json",
+        js6: "clase-6-dom-y-eventos",
+        js7: "clase-7-es6-avanzado"
+    };
+
     // --- ACCIONES ---
     
     // Ejecutar Código
@@ -444,6 +464,61 @@ console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
     }
 
     btnRun.addEventListener("click", runCode);
+
+    // Correr Tests Autoevaluación
+    const btnRunTests = document.getElementById("btn-run-tests");
+    if (btnRunTests) {
+        btnRunTests.addEventListener("click", () => {
+            const modKey = selector.value;
+            const folder = moduleFolders[modKey];
+            if (!folder) return;
+
+            appendToConsole("system-msg", `--- Iniciando Autotesting: Módulo ${modKey.toUpperCase()} ---`);
+            
+            // Eliminar script anterior si existe
+            const oldScript = document.getElementById("active-practice-script");
+            if (oldScript) oldScript.remove();
+
+            // Si es clase-6 (DOM y Eventos), limpiar y restablecer el sandbox DOM
+            if (modKey === "js6") {
+                const sandbox = document.getElementById("sandbox-dom");
+                if (sandbox) {
+                    sandbox.style.display = "block";
+                    sandbox.innerHTML = `
+                        <!-- Mocks para tests de Clase VI: DOM y Eventos -->
+                        <h1 id="titulo-principal">PlayLab JS Playground</h1>
+                        <p id="parrafo-intro">Este es un párrafo de introducción para testing.</p>
+                        <button id="mi-boton">Click me</button>
+                        <ul id="lista-tareas">
+                            <li>Tarea inicial</li>
+                        </ul>
+                        <div id="contenedor-mensaje"></div>
+                        <form id="formulario-contacto">
+                            <input type="text" id="input-nombre" value="" />
+                            <button type="submit">Enviar</button>
+                        </form>
+                    `;
+                }
+            } else {
+                const sandbox = document.getElementById("sandbox-dom");
+                if (sandbox) {
+                    sandbox.innerHTML = "";
+                }
+            }
+
+            // Crear y agregar el script
+            const script = document.createElement("script");
+            script.id = "active-practice-script";
+            script.src = `./${folder}/practica.js?t=${Date.now()}`;
+            
+            script.onerror = () => {
+                console.error(`Error al cargar el archivo de práctica. Verificá que exista '${folder}/practica.js'`);
+                appendToConsole("error-msg", `❌ Error al cargar '${folder}/practica.js'. Asegurate de que el archivo exista en la ruta correcta.`);
+            };
+
+            document.body.appendChild(script);
+        });
+    }
 
     // Resetear código original del módulo
     btnReset.addEventListener("click", () => {
@@ -478,5 +553,5 @@ console.log("Copia modificada sin mutar original:", primerUsuarioClonado);
     });
 
     // --- INICIALIZACIÓN ---
-    loadModule("js7"); // Cargamos el Módulo VII por defecto al iniciar
+    loadModule("js1"); // Cargamos el Módulo I por defecto al iniciar
 });
