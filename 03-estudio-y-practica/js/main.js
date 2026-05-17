@@ -114,6 +114,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- SELECCIÓN Y CARGA DE EJERCICIOS ---
     const selectorBar = document.getElementById("exercise-selector-bar");
 
+    // Permitir scroll horizontal interactivo arrastrando con la rueda del mouse
+    if (selectorBar) {
+        selectorBar.addEventListener("wheel", (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                selectorBar.scrollLeft += e.deltaY;
+            }
+        });
+    }
+
     function renderExerciseSelector(modKey) {
         selectorBar.innerHTML = "";
         const modData = window.PLAYLAB_EXERCISES[modKey];
