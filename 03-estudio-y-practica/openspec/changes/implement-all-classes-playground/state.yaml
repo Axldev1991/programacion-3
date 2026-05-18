@@ -1,4 +1,4 @@
 change_name: implement-all-classes-playground
-current_phase: apply
-status: active
-completed_phases: [proposal, spec, design, tasks]
+current_phase: archive
+status: completed
+completed_phases: [proposal, spec, design, tasks, apply, verify]

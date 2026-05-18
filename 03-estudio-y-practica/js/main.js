@@ -288,6 +288,60 @@ document.addEventListener("DOMContentLoaded", () => {
     btnRun.addEventListener("click", runCode);
 
     // Correr Tests Autoevaluación
+    // Correr Tests Autoevaluación Dinámicos e Integrados
+    function runLocalPracticeTests(modKey) {
+        const modData = window.PLAYLAB_EXERCISES[modKey];
+        if (!modData) return;
+
+        console.clear();
+        console.log(`%c🧪 INICIANDO AUTO-EVALUACIÓN: ${modData.title.toUpperCase()} 🧪`, "color: #7c4dff; font-weight: 800; font-size: 1.2rem;");
+        console.log("%cValidando tus respuestas locales...", "color: #a3a8b4; font-style: italic;");
+        console.log("-----------------------------------------------------------------");
+
+        let totalTests = modData.exercises.length;
+        let aprobados = 0;
+
+        modData.exercises.forEach((ex) => {
+            let success = false;
+            let errorMsg = "";
+            let errorObj = null;
+
+            try {
+                // Ejecutar el script de validación (testFnCode) de la base de datos
+                const runner = new Function(ex.testFnCode);
+                runner();
+                success = true;
+            } catch (err) {
+                errorMsg = err.message;
+                errorObj = err;
+            }
+
+            const badgeColor = success ? "background: #00e676; color: #000;" : "background: #ff1744; color: #fff;";
+            const icon = success ? "✅" : "❌";
+
+            console.group(`%c EJERCICIO ${ex.id}: ${ex.title} `, `${badgeColor} font-weight: bold; border-radius: 3px; padding: 2px 5px;`);
+            if (success) {
+                console.log(`%c${icon} Aprobado: Test superado con éxito.`, "color: #00e676; font-weight: 500;");
+                aprobados++;
+            } else {
+                console.log(`%c${icon} Fallido: ${errorMsg}`, "color: #ff1744; font-weight: bold;");
+                if (errorObj) {
+                    console.log("%cDetalle del error:", "color: #646a78; font-style: italic;");
+                    console.error(errorObj);
+                }
+            }
+            console.groupEnd();
+        });
+
+        console.log("-----------------------------------------------------------------");
+        if (aprobados === totalTests) {
+            console.log(`%c🏆 ¡EXCELENTE! Aprobaste todos los desafíos del módulo. ¡Escribís código de primer nivel! 🏆`, "color: #00e676; font-weight: bold; font-size: 1.1rem;");
+        } else {
+            console.log(`%c⚠️ Guía en desarrollo: ${aprobados}/${totalTests} aprobados. ¡A seguir practicando! ⚠️`, "color: #ff9100; font-weight: bold; font-size: 1.1rem;");
+        }
+        console.log("-----------------------------------------------------------------");
+    }
+
     const btnRunTests = document.getElementById("btn-run-tests");
     if (btnRunTests) {
         btnRunTests.addEventListener("click", () => {
@@ -336,6 +390,10 @@ document.addEventListener("DOMContentLoaded", () => {
             script.onerror = () => {
                 console.error(`Error al cargar el archivo de práctica. Verificá que exista '${folder}/practica.js'`);
                 appendToConsole("error-msg", `❌ Error al cargar '${folder}/practica.js'. Asegurate de que el archivo exista en la ruta correcta.`);
+            };
+
+            script.onload = () => {
+                runLocalPracticeTests(modKey);
             };
 
             document.body.appendChild(script);
